@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Tutorial</title>
+    <script src="https://unpkg.com/vue@3.0.2"></script>
+    <style>
+      .book {
+        max-width: 600px;
+        height: 200px;
+        /* border-radius: 20px; */
+      }
+      .book li {
+        height: 100%;
+        list-style-type: none;
+        background: #ddd;
+        margin-bottom: 20px;
+        padding: 15px;
+      }
+      .book img {
+        height: 100%;
+        width: 134px;
+        float: left;
+        margin-right: 15px;
+      }
+      .book h2 {
+        margin-top: 0;
+      }
+      li.fav {
+        background: gold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Hello Vue :)</h1>
+    <div id="app">
+      <ul>
+        <h3>Favourite books:</h3>
+        <li v-for="book in filteredBooks">{{ book.title }}</li>
+      </ul>
+      <hr />
+      <ul class="book">
+        <li
+          v-for="book in books"
+          :class="{fav: book.isFav}"
+          @click="toggleFav(book)"
+        >
+          <img :src="book.img" :alt="book.title" />
+          <h2>{{ book.title }}</h2>
+          <p>{{book.author }}</p>
+        </li>
+      </ul>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
