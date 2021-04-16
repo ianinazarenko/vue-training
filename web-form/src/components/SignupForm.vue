@@ -4,7 +4,14 @@
     <input type="email" name="email" id="email" required v-model="email" />
 
     <label for="password">Password :</label>
-    <input type="password" name="password" id="password" required />
+    <input
+      type="password"
+      name="password"
+      id="password"
+      required
+      v-model="password"
+    />
+    <p class="error" v-if="passwordError">{{ passwordError }}</p>
 
     <label for="role">Role:</label>
     <select name="role" id="role" v-model="role">
@@ -40,6 +47,7 @@
         terms: false,
         tempSkill: '',
         skills: JSON.parse(localStorage.getItem('skills')) || [],
+        passwordError: '',
       };
     },
     methods: {
@@ -59,6 +67,19 @@
       },
       onSubmit() {
         console.log('submit!');
+        this.passwordError =
+          this.password.length > 5
+            ? ''
+            : 'Password should be more than 5 characters in length';
+        if (!this.passwordError) {
+          console.log({
+            email: this.email,
+            password: this.password,
+            role: this.role,
+            skills: this.skills,
+            terms: this.terms,
+          });
+        }
       },
     },
   };
@@ -205,5 +226,12 @@
     background-color: rgb(218, 35, 96);
     box-shadow: 0 0 0.25rem rgba(255, 22, 100, 0.5);
     transform: scale(0.99);
+  }
+
+  .error {
+    font-size: 0.8rem;
+    margin-top: -2rem;
+    margin-bottom: 2.5rem;
+    color: red;
   }
 </style>
