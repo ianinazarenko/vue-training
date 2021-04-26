@@ -1,5 +1,5 @@
 <template>
   <div class="about">
-    <h1>AddNewProjct</h1>
+    <h1>AddNewProject</h1>
   </div>
 </template>

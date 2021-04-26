@@ -1,0 +1,16 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "title": "Create site",
+      "details": "lorem",
+      "complete": true
+    },
+    {
+      "id": 2,
+      "title": "Send important letter",
+      "details": "lorem",
+      "complete": false
+    }
+  ]
+}

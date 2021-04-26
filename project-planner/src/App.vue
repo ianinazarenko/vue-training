@@ -1,30 +1,66 @@
 <template>
   <div id="nav">
-    <router-link to="/">Home</router-link> |
+    <router-link to="/">Home</router-link>
     <router-link to="/add">Add New Project</router-link>
   </div>
+  <hr />
   <router-view />
 </template>
 
 <style>
+  :root {
+    --main-color: rgb(87, 105, 119);
+    --accent-color: rgb(233, 0, 116);
+    --white-color: #fff;
+    --transition: all 0.3s ease-out;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    font-size: 18px;
+  }
+
+  body {
+    background-color: #eee;
+  }
+
   #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
+    max-width: 600px;
+    margin: 2rem auto;
+    color: var(--main-color);
   }
 
   #nav {
-    padding: 30px;
+    text-align: center;
+    /* margin: 0 0 3rem 0; */
+    padding-bottom: 1.5rem;
+  }
+
+  hr {
+    border: 1px solid var(--accent-color);
   }
 
   #nav a {
-    font-weight: bold;
-    color: #2c3e50;
+    margin: 0 2rem;
+    transition: var(--transition);
   }
 
-  #nav a.router-link-exact-active {
-    color: #42b983;
+  #nav a:hover {
+    color: var(--accent-color);
+    text-shadow: 0 0 0.5rem rgba(233, 0, 116, 0.2);
+  }
+
+  a {
+    text-decoration: none;
+    color: var(--main-color);
+    font-weight: bold;
   }
 </style>
