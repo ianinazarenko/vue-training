@@ -111,4 +111,9 @@
   .completed .tick {
     color: forestgreen;
   }
+
+  .completed h3 {
+    text-decoration: line-through;
+    text-decoration-thickness: 0.125rem;
+  }
 </style>
