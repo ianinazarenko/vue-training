@@ -1,7 +1,11 @@
 <template>
   <div v-if="projects.length" class="home">
     <div v-for="project in projects" :key="project.id">
-      <Project :project="project" />
+      <Project
+        :project="project"
+        @delete="handleDelete"
+        @complete="handleComplete"
+      />
     </div>
   </div>
 </template>
@@ -24,15 +28,21 @@
         .then((data) => (this.projects = data))
         .catch((err) => console.log(err))
     },
+    methods: {
+      handleDelete(id) {
+        this.projects = this.projects.filter((project) => project.id !== id)
+      },
+      handleComplete(id) {
+        this.projects.forEach((project) => {
+          if (project.id === id) project.complete = !project.complete
+        })
+      },
+    },
   }
 </script>
 
 <style>
   .home {
     padding: 3rem 0;
-  }
-
-  .home div {
-    width: 100%;
   }
 </style>
