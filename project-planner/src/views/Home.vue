@@ -1,5 +1,5 @@
 <template>
-  <div v-if="projects.length" class="home">
+  <section v-if="projects.length" class="section">
     <div v-for="project in projects" :key="project.id">
       <Project
         :project="project"
@@ -7,7 +7,7 @@
         @complete="handleComplete"
       />
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -41,8 +41,4 @@
   }
 </script>
 
-<style>
-  .home {
-    padding: 3rem 0;
-  }
-</style>
+<style></style>

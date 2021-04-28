@@ -3,7 +3,14 @@
     <div class="actions">
       <h3 @click="showDetails = !showDetails">{{ project.title }}</h3>
       <div class="icons">
-        <span class="material-icons" id="edit"> edit </span>
+        <router-link
+          :to="{
+            name: 'EditProject',
+            params: { id: project.id },
+          }"
+        >
+          <span class="material-icons" id="edit"> edit </span>
+        </router-link>
         <span class="material-icons" id="delete" @click="deleteItem"
           >delete</span
         >
@@ -27,9 +34,9 @@
     },
     methods: {
       deleteItem() {
-        fetch(this.uri, { method: 'DELETE' }).then(() =>
-          this.$emit('delete', this.project.id).catch((err) => console.log(err))
-        )
+        fetch(this.uri, { method: 'DELETE' })
+          .then(() => this.$emit('delete', this.project.id))
+          .catch((err) => console.log(err))
       },
       complete() {
         fetch(this.uri, {
@@ -79,6 +86,10 @@
     transform: scale(1.1);
   }
 
+  .material-icons:active {
+    transform: scale(0.5);
+  }
+
   #edit:hover {
     color: orange;
   }
@@ -115,5 +126,10 @@
   .completed h3 {
     text-decoration: line-through;
     text-decoration-thickness: 0.125rem;
+  }
+
+  .icons a {
+    display: inline-block;
+    height: 100%;
   }
 </style>

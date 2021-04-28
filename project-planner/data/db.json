@@ -7,10 +7,10 @@
       "complete": false
     },
     {
-      "id": 2,
-      "title": "Send important letter",
-      "details": "lorem",
-      "complete": false
+      "title": "Create a web site",
+      "details": "Some cool details about site project should be here",
+      "complete": false,
+      "id": 3
     }
   ]
 }

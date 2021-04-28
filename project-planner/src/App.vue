@@ -40,7 +40,6 @@
 
   #nav {
     text-align: center;
-    /* margin: 0 0 3rem 0; */
     padding-bottom: 1.5rem;
   }
 
@@ -50,7 +49,6 @@
 
   #nav a {
     margin: 0 2rem;
-    transition: var(--transition);
   }
 
   #nav a:hover {
@@ -62,5 +60,17 @@
     text-decoration: none;
     color: var(--main-color);
     font-weight: bold;
+  }
+
+  .section {
+    padding: 3rem 0;
+  }
+
+  .router-link-active {
+    color: var(--accent-color);
+  }
+
+  #nav a:active {
+    color: var(--white-color);
   }
 </style>
