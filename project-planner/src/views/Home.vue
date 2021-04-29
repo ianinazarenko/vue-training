@@ -1,6 +1,10 @@
 <template>
   <section v-if="projects.length" class="section">
-    <div v-for="project in projects" :key="project.id">
+    <NavFilter
+      @change:filter="currentFilter = $event"
+      :filter="currentFilter"
+    />
+    <div v-for="project in filteredProjects" :key="project.id">
       <Project
         :project="project"
         @delete="handleDelete"
@@ -12,15 +16,30 @@
 
 <script>
   import Project from '../components/Project'
+  import NavFilter from '../components/NavFilter'
+
   export default {
     name: 'Home',
     components: {
       Project,
+      NavFilter,
     },
     data() {
       return {
         projects: [],
+        currentFilter: 'all',
       }
+    },
+    computed: {
+      filteredProjects: function() {
+        if (this.currentFilter === 'completed') {
+          return this.projects.filter((project) => project.complete)
+        } else if (this.currentFilter === 'ongoing') {
+          return this.projects.filter((project) => !project.complete)
+        } else {
+          return this.projects
+        }
+      },
     },
     mounted() {
       fetch('http://localhost:3000/projects')

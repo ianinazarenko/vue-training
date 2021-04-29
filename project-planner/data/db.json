@@ -9,7 +9,7 @@
     {
       "title": "Create a web site",
       "details": "Some cool details about site project should be here",
-      "complete": false,
+      "complete": true,
       "id": 3
     }
   ]

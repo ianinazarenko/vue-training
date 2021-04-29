@@ -76,7 +76,7 @@
     min-height: 7rem;
   }
 
-  button {
+  button[type='submit'] {
     align-self: center;
     padding: 0.75rem 1.5rem;
     border-radius: 0.5rem;
@@ -90,7 +90,7 @@
     transition: var(--transition);
   }
 
-  button:hover {
+  button[type='submit']:hover {
     box-shadow: 0 0 0.25rem rgba(233, 0, 116, 0.5);
     background-color: rgb(204, 0, 102);
     transform: scale(0.99);
