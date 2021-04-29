@@ -1,6 +1,6 @@
 <template>
   <section class="section">
-    <form @submit.prevent="handleSubmit">
+    <form @submit.prevent="updateProject">
       <label for="title">Title:</label>
       <input v-model="title" type="text" id="title" required />
       <label for="details">Details:</label>
@@ -12,7 +12,7 @@
 
 <script>
   export default {
-    props: ['id', 'project'],
+    props: ['id'],
     data() {
       return {
         title: '',
@@ -21,13 +21,21 @@
       }
     },
     mounted() {
-      // console.log(this.$route.params, this.project)
       fetch(this.uri)
         .then((response) => response.json())
         .then((data) => {
           this.title = data.title
           this.details = data.details
         })
+    },
+    methods: {
+      updateProject() {
+        fetch(this.uri, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title: this.title, details: this.details }),
+        }).then(() => this.$router.push({ name: 'Home' }))
+      },
     },
   }
 </script>
