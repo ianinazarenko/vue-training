@@ -35,6 +35,9 @@
 </template>
 
 <script>
+  import slugify from 'slugify'
+  import db from '@/database/init'
+
   export default {
     data() {
       return {
@@ -46,7 +49,26 @@
     },
     methods: {
       addSmoothie() {
-        console.log(this.title)
+        if (this.title) {
+          this.feedback = null
+          let slug = slugify(this.title, {
+            replacement: '-',
+            remove: /[$*_+~.()'"!\-:@]/g,
+            lower: true,
+          })
+          db.collection('smoothies')
+            .add({
+              title: this.title,
+              ingredients: this.ingredients,
+              slug,
+            })
+            .then(() => {
+              this.$router.push({ name: 'Home' })
+            })
+            .catch((err) => console.log(err))
+        } else {
+          this.feedback = 'You must enter a smoothie title'
+        }
       },
       addIng(e) {
         if (this.newIng) {
