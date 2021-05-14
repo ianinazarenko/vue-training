@@ -18,8 +18,10 @@
 
 <script>
   import db from '@/database/init'
+  import AddNewSmoothie from '@/views/AddNewSmoothie'
 
   export default {
+    components: { AddNewSmoothie },
     data() {
       return {
         smoothies: [],
@@ -63,6 +65,7 @@
   }
   .home .ingredients {
     display: flex;
+    flex-wrap: wrap;
   }
   .home .card-content {
     position: relative;
