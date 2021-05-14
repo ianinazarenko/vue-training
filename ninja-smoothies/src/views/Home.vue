@@ -17,29 +17,36 @@
 </template>
 
 <script>
+  import db from '@/database/init'
+
   export default {
     data() {
       return {
-        smoothies: [
-          {
-            title: 'Ninja Brew',
-            slug: 'ninja-brew',
-            ingredients: ['bananas', 'coffee', 'milk'],
-            id: '1',
-          },
-          {
-            title: 'Morning Mood',
-            slug: 'morning-mood',
-            ingredients: ['mango', 'lime', 'juice'],
-            id: '2',
-          },
-        ],
+        smoothies: [],
       }
     },
     methods: {
       deleteSmoothie(id) {
-        this.smoothies = this.smoothies.filter((item) => item.id !== id)
+        db.collection('smoothies')
+          .doc(id)
+          .delete()
+          .then(
+            () =>
+              (this.smoothies = this.smoothies.filter((item) => item.id !== id))
+          )
       },
+    },
+    created() {
+      // fetch data from database
+      db.collection('smoothies')
+        .get()
+        .then((snapshot) => {
+          snapshot.forEach((doc) => {
+            let smoothie = doc.data()
+            smoothie.id = doc.id
+            this.smoothies.push(smoothie)
+          })
+        })
     },
   }
 </script>
@@ -51,19 +58,15 @@
     grid-gap: 30px;
     margin-top: 60px;
   }
-
   .home h2 {
     font-size: 2em;
   }
-
   .home .ingredients {
     display: flex;
   }
-
   .home .card-content {
     position: relative;
   }
-
   .home .delete {
     position: absolute;
     top: 18px;
