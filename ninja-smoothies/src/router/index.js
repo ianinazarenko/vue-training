@@ -19,7 +19,7 @@ const routes = [
     component: AddNewSmoothie,
   },
   {
-    path: '/edit/:id',
+    path: '/edit/:smoothie_slug',
     name: 'Edit',
     component: EditSmoothie,
     // props: true,

@@ -1,9 +1,16 @@
 <template>
-  <h1>Edit Smoothy with id: {{ $route.params.id }}</h1>
+  <div class="edit-smoothie container">
+    <h2>Edit a smoothie {{ $route.params.smoothie_slug }}</h2>
+  </div>
 </template>
 
 <script>
-  export default {}
+  export default {
+    name: 'EditSmoothie',
+    data() {
+      return {}
+    },
+  }
 </script>
 
 <style></style>
