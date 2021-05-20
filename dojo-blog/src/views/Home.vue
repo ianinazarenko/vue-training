@@ -1,30 +1,40 @@
 <template>
   <div class="home">
-    <h1 ref="h">Hello, this is {{ name }} and I'm a {{ job }}</h1>
-    <button @click="handleClick">click me</button>
+    <h1>Home</h1>
+    <p v-if="error">{{ error }}</p>
+    <div v-if="posts.length">
+      <PostList :posts="posts" />
+    </div>
+    <h3 v-else>
+      <Spinner />
+    </h3>
   </div>
+  <router-link :to="{ name: 'Create' }">
+    <button>Create New Post</button>
+  </router-link>
 </template>
 
 <script>
 // @ is an alias to /src
-import { ref } from 'vue'
+import PostList from '@/components/PostList'
+import getPosts from '@/composables/getPosts'
+import Spinner from '@/components/Spinner'
 
 export default {
   name: 'Home',
-  components: {},
+  components: { PostList, Spinner },
   setup() {
-    const name = ref('Nino')
-    const job = ref('designer')
+    const { posts, error, load } = getPosts()
+    load()
 
-    function handleClick() {
-      console.log("you've clicked me")
-      console.log(h.value)
-      name.value = 'mario'
-    }
-
-    const h = ref(null)
-
-    return { name: name, job, handleClick, h }
+    return { posts, error }
   },
 }
 </script>
+
+<style>
+ul {
+  list-style: none;
+  padding: 0;
+}
+</style>
