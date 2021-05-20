@@ -2,7 +2,7 @@
   <p v-if="error">{{ error }}</p>
   <div v-if="post" class="post">
     <h1>{{ post.title }}</h1>
-    <p>{{ post.body }}</p>
+    <p class="pre">{{ post.body }}</p>
   </div>
   <h2 v-if="!post && !error">
     <Spinner />
@@ -28,7 +28,15 @@ export default {
 
 <style>
 .post {
-  max-width: 600px;
-  margin: 3rem auto;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.post p {
+  color: #444;
+  line-height: 1.5em;
+  margin-top: 40px;
+}
+.pre {
+  white-space: pre-wrap;
 }
 </style>

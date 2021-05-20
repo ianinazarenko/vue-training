@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <h1>Home</h1>
     <p v-if="error">{{ error }}</p>
     <div v-if="posts.length">
       <PostList :posts="posts" />
@@ -9,9 +8,6 @@
       <Spinner />
     </h3>
   </div>
-  <router-link :to="{ name: 'Create' }">
-    <button>Create New Post</button>
-  </router-link>
 </template>
 
 <script>
@@ -33,8 +29,9 @@ export default {
 </script>
 
 <style>
-ul {
-  list-style: none;
-  padding: 0;
+.home {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px;
 }
 </style>

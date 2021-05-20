@@ -20,6 +20,7 @@
 
 <script>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 export default {
   setup() {
@@ -28,25 +29,23 @@ export default {
     const tag = ref(null)
     const tags = ref([])
 
+    const router = useRouter()
+
     function addTag(e) {
-      console.log(e.target.value)
       const newTag = e.target.value
       if (newTag && !tags.value.includes(newTag)) {
         newTag.replace(/\s/, '')
         tags.value.push(newTag)
       } else if (!newTag) {
-        // feedback.value = 'You must enter some value'
         console.log('You must enter some value')
       }
       tag.value = null
-      console.log(tags.value)
     }
 
     async function addPost(e) {
       const post = {
-        // id: Date.now(),
         title: title.value,
-        content: content.value,
+        body: content.value,
         tags: tags.value,
       }
       try {
@@ -55,6 +54,7 @@ export default {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(post),
         })
+        router.push('/')
       } catch (error) {
         console.log(error)
       }
