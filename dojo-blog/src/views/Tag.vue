@@ -1,12 +1,15 @@
 <template>
-  <div v-if="taggedPosts.length">
-    <PostList :posts="taggedPosts" />
-  </div>
-  <div v-if="!taggedPosts.length && !error">
-    <Spinner />
-  </div>
-  <div v-if="error" class="red-text">
-    {{ error.message }}
+  <div class="tag">
+    <div v-if="taggedPosts.length" class="layout">
+      <PostList :posts="taggedPosts" />
+      <TagsCloud :posts="posts" />
+    </div>
+    <div v-if="!taggedPosts.length && !error">
+      <Spinner />
+    </div>
+    <div v-if="error" class="red-text">
+      {{ error.message }}
+    </div>
   </div>
 </template>
 
@@ -16,9 +19,10 @@ import { useRoute } from 'vue-router'
 import getPosts from '@/composables/getPosts'
 import PostList from '@/components/PostList'
 import Spinner from '@/components/Spinner'
+import TagsCloud from '@/components/TagsCloud'
 
 export default {
-  components: { PostList, Spinner },
+  components: { PostList, Spinner, TagsCloud },
   setup() {
     const currentTag = useRoute().params.tag
     const { posts, error, load } = getPosts()
@@ -33,4 +37,10 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style>
+.tag {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px;
+}
+</style>
