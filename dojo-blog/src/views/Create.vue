@@ -32,9 +32,9 @@ export default {
     const router = useRouter()
 
     function addTag(e) {
-      const newTag = e.target.value
+      let newTag = e.target.value
       if (newTag && !tags.value.includes(newTag)) {
-        newTag.replace(/\s/, '')
+        newTag = newTag.replace(/\s/g, '')
         tags.value.push(newTag)
       } else if (!newTag) {
         console.log('You must enter some value')
