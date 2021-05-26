@@ -6,6 +6,7 @@
 
 <script>
 import Post from '@/components/Post'
+import { isReactive } from 'vue'
 
 export default {
   props: ['posts'],

@@ -12,12 +12,16 @@
 </template>
 
 <script>
+import { ref } from 'vue'
+
 export default {
   props: ['posts'],
   setup(props) {
-    let tags = new Set()
-    props.posts.forEach((post) => post.tags.forEach((tag) => tags.add(tag)))
-    tags = [...tags]
+    const tags = ref([])
+    const tagSet = new Set()
+    props.posts.forEach((post) => post.tags.forEach((tag) => tagSet.add(tag)))
+    console.log(tagSet)
+    tags.value = [...tagSet]
 
     return { tags }
   },

@@ -1,10 +1,10 @@
 <template>
   <div class="tag">
-    <div v-if="taggedPosts.length" class="layout">
-      <PostList :posts="taggedPosts" />
+    <div v-if="postsWithTag.length" class="layout">
+      <PostList :posts="postsWithTag" />
       <TagsCloud :posts="posts" />
     </div>
-    <div v-if="!taggedPosts.length && !error">
+    <div v-if="!postsWithTag.length && !error">
       <Spinner />
     </div>
     <div v-if="error" class="red-text">
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { computed } from 'vue'
+import { computed, ref, watch, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import getPosts from '@/composables/getPosts'
 import PostList from '@/components/PostList'
@@ -24,15 +24,15 @@ import TagsCloud from '@/components/TagsCloud'
 export default {
   components: { PostList, Spinner, TagsCloud },
   setup() {
-    const currentTag = useRoute().params.tag
+    const route = useRoute()
     const { posts, error, load } = getPosts()
     load()
 
-    const taggedPosts = computed(() =>
-      posts.value.filter((post) => post.tags.includes(currentTag))
+    const postsWithTag = computed(() =>
+      posts.value.filter((post) => post.tags.includes(route.params.tag))
     )
 
-    return { taggedPosts, error, posts }
+    return { postsWithTag, error, posts }
   },
 }
 </script>

@@ -1,4 +1,5 @@
 import { ref } from 'vue'
+import { projectFirestore } from '@/firebase/config'
 
 export default function getPosts() {
   const posts = ref([])
@@ -6,13 +7,10 @@ export default function getPosts() {
 
   async function load() {
     try {
-      // await new Promise((resolve) => setTimeout(() => resolve(), 2000))
-      const response = await fetch('http://localhost:3000/posts')
-
-      if (!response.ok) {
-        throw new Error('no data availiable')
-      }
-      posts.value = await response.json()
+      const response = await projectFirestore.collection('posts').get()
+      response.docs.forEach((doc) =>
+        posts.value.push({ ...doc.data(), id: doc.id })
+      )
     } catch (err) {
       console.log('Error!: ' + err.message)
       error.value = err.message

@@ -62,5 +62,6 @@ export default {
 }
 .post .tag {
   margin-right: 10px;
+  padding-left: 0;
 }
 </style>

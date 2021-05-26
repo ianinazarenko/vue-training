@@ -17,7 +17,6 @@ export default {
   props: ['id'],
   components: { Spinner },
   setup(props) {
-    console.log(props.id)
     const { post, error, load } = getPost(props.id)
     load()
 
