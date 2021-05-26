@@ -18,10 +18,9 @@ export default {
   props: ['posts'],
   setup(props) {
     const tags = ref([])
-    const tagSet = new Set()
-    props.posts.forEach((post) => post.tags.forEach((tag) => tagSet.add(tag)))
-    console.log(tagSet)
-    tags.value = [...tagSet]
+    const tagsSet = new Set()
+    props.posts.forEach((post) => post.tags.forEach((tag) => tagsSet.add(tag)))
+    tags.value = [...tagsSet]
 
     return { tags }
   },

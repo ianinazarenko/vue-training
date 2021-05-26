@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { computed, ref, watch, watchEffect } from 'vue'
+import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import getPosts from '@/composables/getPosts'
 import PostList from '@/components/PostList'

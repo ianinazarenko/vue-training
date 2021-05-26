@@ -7,7 +7,10 @@ export default function getPosts() {
 
   async function load() {
     try {
-      const response = await projectFirestore.collection('posts').get()
+      const response = await projectFirestore
+        .collection('posts')
+        .orderBy('createdAt', 'desc')
+        .get()
       response.docs.forEach((doc) =>
         posts.value.push({ ...doc.data(), id: doc.id })
       )

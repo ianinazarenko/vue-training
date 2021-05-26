@@ -16,7 +16,7 @@ export default function getPost(id) {
         throw new Error('There is no such post')
       }
 
-      post.value = { ...response, id: response.id }
+      post.value = { ...response.data(), id: response.id }
     } catch (err) {
       console.log('Error!: ' + err.message)
       error.value = err.message
