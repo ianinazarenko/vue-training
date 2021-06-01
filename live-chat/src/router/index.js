@@ -1,6 +1,18 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Welcome from '@/views/Welcome'
 import Chatroom from '@/views/Chatroom'
+import { auth } from '@/data/config'
+
+// auth guard
+function requireAuth(to, from, next) {
+  let user = auth.currentUser
+  // console.log('Current user in guard: ', user)
+  if (user) {
+    next()
+  } else {
+    next(from)
+  }
+}
 
 const routes = [
   {
@@ -12,6 +24,7 @@ const routes = [
     path: '/chatroom',
     name: 'Chatroom',
     component: Chatroom,
+    beforeEnter: requireAuth,
   },
   // {
   //   path: '/about',
