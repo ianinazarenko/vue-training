@@ -5,18 +5,20 @@
       v-model="message"
       @keypress.enter.prevent="handleSubmit"
     ></textarea>
+    <div class="error">{{ error }}</div>
   </form>
 </template>
 
 <script>
 import { ref } from 'vue'
-import getUser from '@/composables/getUser'
+import { getUser, useCollection } from '@/composables'
 import { timestamp } from '@/data/config'
 
 export default {
   setup() {
     const { user } = getUser()
     const message = ref('')
+    const { error, addDoc } = useCollection('messages')
 
     async function handleSubmit() {
       const chat = {
@@ -25,8 +27,8 @@ export default {
         createdAt: timestamp(),
       }
 
-      console.log(chat)
-      message.value = ''
+      await addDoc(chat)
+      if (!error.value) message.value = ''
     }
 
     return { message, handleSubmit }
