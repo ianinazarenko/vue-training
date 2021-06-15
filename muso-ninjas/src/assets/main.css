@@ -1,0 +1,82 @@
+/* custom font */
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200;300;400;600;700;900&display=swap');
+
+/* variables */
+:root {
+  --primary: #4f515a;
+  --secondary: #ebebeb;
+  --warning: #da0f41;
+  --radius: 0.5rem;
+  --transition: all 0.3s linear;
+}
+
+/* global styles */
+* {
+  /* global not inherited properties */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  /* global inherited properties (rem counts from here) */
+  font-family: 'Titillium Web', sans-serif;
+  /* font-size: 16px; */
+}
+body {
+  background: #fafafa;
+  /* color is global inherited
+  but it is here because it comes from inline body property "text"  */
+  color: var(--primary);
+}
+a {
+  text-decoration: none;
+}
+button,
+.btn {
+  display: inline-block;
+  padding: 0.5rem 0.75rem;
+  background: var(--secondary);
+  border-radius: var(--radius);
+  border: none;
+  font-weight: 600;
+  transition: var(--transition);
+  cursor: pointer;
+}
+button:hover,
+.btn:hover {
+  background: var(--primary);
+  color: var(--secondary);
+}
+.button:disabled {
+  opacity: 0.5;
+  background: var(--secondary);
+  color: var(--primary);
+  cursor: not-allowed;
+}
+
+/* forms */
+form {
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: 1px 2px 3px rgba(50, 50, 50, 0.05);
+  border: 1px solid var(--secondary);
+  background: white;
+}
+input,
+textarea {
+  border: none;
+  border-bottom: 1px solid var(--secondary);
+  padding: 0.625rem;
+  outline: none;
+  display: block;
+  width: 100%;
+  margin: 1.25rem auto;
+}
+
+/* error */
+.error {
+  color: var(--warning);
+  font-size: 0.875rem;
+  margin: 1rem 0;
+}

@@ -1,6 +1,7 @@
 <template>
   <div class="content">
     <router-view />
+    <h1>Muso Ninjas</h1>
   </div>
 </template>
 
