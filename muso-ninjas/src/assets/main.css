@@ -7,7 +7,7 @@
   --secondary: #ebebeb;
   --warning: #da0f41;
   --radius: 0.5rem;
-  --transition: all 0.3s linear;
+  --transition: all 0.3s ease-out;
 }
 
 /* global styles */
@@ -16,10 +16,12 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Titillium Web', sans-serif;
 }
 html {
   /* global inherited properties (rem counts from here) */
-  font-family: 'Titillium Web', sans-serif;
+  /* I moved font-family to '*' because form fields & buttons styles are overrided by browser's default styles */
+  /* font-family: 'Titillium Web', sans-serif; */
   /* font-size: 16px; */
 }
 body {
@@ -56,6 +58,7 @@ button:hover,
 
 /* forms */
 form {
+  max-width: 400px;
   margin: 0 auto;
   padding: 2rem;
   border-radius: var(--radius);
