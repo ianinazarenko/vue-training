@@ -1,5 +1,6 @@
 import { ref } from 'vue'
 import { auth } from '../data/config'
+import getUser from './getUser'
 
 const error = ref(null)
 const isPending = ref(false)
@@ -10,6 +11,10 @@ async function login(email, password) {
 
   try {
     const response = await auth.signInWithEmailAndPassword(email, password)
+    // console.log(response)
+    // const user = await getUser()
+    console.log(user.value)
+
     if (!response) {
       throw new Error('Could not log in')
     }
