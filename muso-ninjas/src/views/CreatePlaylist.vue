@@ -22,16 +22,21 @@
 
 <script>
 import { ref } from 'vue'
+import { useStorage } from '@/composables'
 
 export default {
   setup() {
+    // Most of the form exept file
     const title = ref('')
     const description = ref('')
     const error = ref(null)
 
-    function handleSubmit() {
+    const { filePath, url, uploadImage } = useStorage()
+
+    async function handleSubmit() {
       if (file.value) {
-        console.log(title.value, description.value)
+        await uploadImage(file.value)
+        console.log('image url:', url.value)
       }
     }
 
@@ -70,7 +75,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 input[type='file'] {
   border: none;
   padding: 0;

@@ -6,6 +6,7 @@
       </h1>
       <div class="links">
         <div v-if="user">
+          <span>Hi, {{ user.displayName }}</span>
           <button @click="handleLogout">Logout</button>
         </div>
         <div v-else>
@@ -27,12 +28,11 @@ export default {
   setup() {
     const { logout } = useLogout()
     const router = useRouter()
-    const user = getUser()
-
-    console.log(user.value)
+    const { user } = getUser()
 
     async function handleLogout() {
       const response = await logout()
+      console.log(user.value)
       console.log('user log out', response)
       router.push({ name: 'Login' })
     }

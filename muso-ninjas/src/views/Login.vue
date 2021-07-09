@@ -11,18 +11,22 @@
 
 <script>
 import { ref } from 'vue'
-import { useLogin } from '@/composables'
+import { useLogin, getUser } from '@/composables'
+import { useRouter } from 'vue-router'
 
 export default {
   setup() {
     const email = ref('')
     const password = ref('')
     const { error, login, isPending } = useLogin()
+    const router = useRouter()
+    const user = getUser()
 
     async function handleSubmit() {
-      const response = await login(email.value, password.value)
+      await login(email.value, password.value)
       if (!error.value) {
         console.log('user logged in')
+        router.push({ name: 'Home' })
       }
     }
 

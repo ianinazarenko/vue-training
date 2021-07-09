@@ -11,9 +11,7 @@ async function login(email, password) {
 
   try {
     const response = await auth.signInWithEmailAndPassword(email, password)
-    // console.log(response)
-    // const user = await getUser()
-    console.log(user.value)
+    console.log('useLogin login response', response)
 
     if (!response) {
       throw new Error('Could not log in')
