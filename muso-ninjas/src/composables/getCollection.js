@@ -7,15 +7,16 @@ function getCollection(collection) {
 
   const collectionRef = firestore.collection(collection).orderBy('createdAt')
   const unsub = collectionRef.onSnapshot(
-    (snap) => {
+    snap => {
       const results = []
-      snap.docs.forEach((doc) => {
+      snap.docs.forEach(doc => {
         doc.data().createdAt && results.push({ ...doc.data(), id: doc.id })
       })
+      console.log(results)
       documents.value = results
       error.value = null
     },
-    (err) => {
+    err => {
       console.log(err.message)
       documents.value = null
       error.value = err.message
@@ -23,7 +24,7 @@ function getCollection(collection) {
   )
 
   // unsubscribe from collectionRef before the element that uses getCollection unmounts
-  watchEffect((onInvalidate) => {
+  watchEffect(onInvalidate => {
     onInvalidate(() => unsub())
   })
 

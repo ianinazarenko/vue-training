@@ -16,27 +16,48 @@
     />
     <div class="error">{{ fileError }}</div>
     <div class="error">{{ error }}</div>
-    <button type="submit">Create</button>
+    <!-- <button :disabled="isPending" type="submit">
+      {{ isPending ? 'Saving...' : 'Create' }}
+    </button> -->
+    <button v-if="!isPending">Create</button>
+    <button v-else disabled>Saving...</button>
   </form>
 </template>
 
 <script>
 import { ref } from 'vue'
-import { useStorage } from '@/composables'
+import { useStorage, useCollection, getUser } from '@/composables'
+import { timestamp } from '@/data/config'
 
 export default {
   setup() {
-    // Most of the form exept file
     const title = ref('')
     const description = ref('')
-    const error = ref(null)
-
+    const { user } = getUser()
+    const isPending = ref(false)
+    const { error, addDoc } = useCollection('playlists')
     const { filePath, url, uploadImage } = useStorage()
 
     async function handleSubmit() {
       if (file.value) {
+        isPending.value = true
         await uploadImage(file.value)
-        console.log('image url:', url.value)
+        await addDoc({
+          title: title.value,
+          description: description.value,
+          userID: user.value.uid,
+          userName: user.value.displayName,
+          coverUrl: url.value,
+          filePath: filePath.value,
+          songs: [],
+          createdAt: timestamp(),
+        })
+        isPending.value = false
+        if (!error.value) {
+          console.log('Playlist added')
+          title.value = ''
+          description.value = ''
+        }
       }
     }
 
@@ -70,6 +91,7 @@ export default {
       error,
       fileError,
       handleFileUpload,
+      isPending,
     }
   },
 }
