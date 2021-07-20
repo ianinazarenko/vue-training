@@ -4,11 +4,24 @@ import Login from '../views/Login.vue'
 import Signup from '../views/Signup.vue'
 import CreatePlaylist from '../views/CreatePlaylist.vue'
 
+// route guard
+import { auth } from '@/data/config'
+
+function requireAuth(to, from, next) {
+  const user = auth.currentUser
+  if (!user) {
+    next({ name: 'Login' })
+  } else {
+    next()
+  }
+}
+
 const routes = [
   {
     path: '/',
     name: 'Home',
     component: Home,
+    beforeEnter: requireAuth,
   },
   {
     path: '/login',
@@ -24,6 +37,7 @@ const routes = [
     path: '/playlists/create',
     name: 'CreatePlaylist',
     component: CreatePlaylist,
+    beforeEnter: requireAuth,
   },
 ]
 

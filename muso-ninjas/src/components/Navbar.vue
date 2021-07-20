@@ -7,6 +7,9 @@
       <div class="links">
         <div v-if="user">
           <span>Hi, {{ user.displayName }}</span>
+          <router-link :to="{ name: 'CreatePlaylist' }"
+            >Create playlist</router-link
+          >
           <button @click="handleLogout">Logout</button>
         </div>
         <div v-else>
