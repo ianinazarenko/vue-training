@@ -10,7 +10,8 @@ function useCollection(collection) {
     isPending.value = true
 
     try {
-      await firestore.collection(collection).add(doc)
+      const response = await firestore.collection(collection).add(doc)
+      return response
     } catch (err) {
       console.log(err.message)
       error.value = err.message
