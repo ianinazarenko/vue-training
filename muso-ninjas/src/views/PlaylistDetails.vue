@@ -13,7 +13,24 @@
     </div>
 
     <!-- song list -->
-    <div class="song-list">song list here</div>
+    <div class="song-list">
+      <p v-if="!document.songs.length">
+        No songs has been added to this playlist yet.
+      </p>
+      <div
+        v-else
+        v-for="song in document.songs"
+        :key="song.id"
+        class="single-song"
+      >
+        <div class="details">
+          <h3>{{ song.title }}</h3>
+          <p>{{ song.artist }}</p>
+        </div>
+        <button v-if="ownership" @click="deleteSong(song.id)">Delete</button>
+      </div>
+      <AddSong v-if="ownership" :playlist="document" />
+    </div>
   </div>
 </template>
 
@@ -21,9 +38,11 @@
 import { computed } from 'vue'
 import { getDocument, getUser, useDocument, useStorage } from '@/composables'
 import { useRouter } from 'vue-router'
+import AddSong from '@/components/AddSong'
 
 export default {
   props: ['id'],
+  components: { AddSong },
   setup(props) {
     const { document, error } = getDocument('playlists', props.id)
     const { user } = getUser()
@@ -45,7 +64,15 @@ export default {
       router.push({ name: 'Home' })
     }
 
-    return { document, error, ownership, handleDelete }
+    // Delete song
+    const { updateDoc } = useDocument('playlists', props.id)
+    async function deleteSong(id) {
+      await updateDoc({
+        songs: document.value.songs.filter(song => song.id !== id),
+      })
+    }
+
+    return { document, error, ownership, handleDelete, deleteSong }
   },
 }
 </script>
@@ -67,8 +94,10 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  object-fit: cover;
+  min-width: 100%;
+  min-height: 100%;
+  max-width: 200%;
+  max-height: 200%;
 }
 .playlist-info {
   text-align: center;
@@ -86,5 +115,13 @@ export default {
 }
 .description {
   text-align: left;
+}
+.single-song {
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px dashed var(--secondary);
+  margin-bottom: 20px;
 }
 </style>
