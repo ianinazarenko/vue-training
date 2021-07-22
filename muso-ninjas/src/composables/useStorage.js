@@ -22,7 +22,18 @@ function useStorage() {
     }
   }
 
-  return { error, url, filePath, uploadImage }
+  async function deleteImage(path) {
+    const storageRef = storage.ref(path)
+
+    try {
+      await storageRef.delete()
+    } catch (err) {
+      console.log(err.message)
+      error.value = 'Could not delete image'
+    }
+  }
+
+  return { error, url, filePath, uploadImage, deleteImage }
 }
 
 export default useStorage

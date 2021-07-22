@@ -5,6 +5,8 @@ import useLogin from '@/composables/useLogin'
 import useLogout from '@/composables/useLogout'
 import useSignUp from '@/composables/useSignUp'
 import useStorage from '@/composables/useStorage'
+import getDocument from '@/composables/getDocument'
+import useDocument from '@/composables/useDocument'
 
 export {
   getUser,
@@ -14,4 +16,6 @@ export {
   useLogout,
   useSignUp,
   useStorage,
+  getDocument,
+  useDocument,
 }
